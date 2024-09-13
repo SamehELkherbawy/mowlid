@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تخصيص الاسم في التصميم</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #design {
+            width: 1200px;
+            height: 1200px;
+            background-image: url('m1.png');
+            background-size: cover;
+            position: relative;
+            margin: 0 auto; /* Center the design div horizontally */
+        }
+        #name {
+            position: absolute;
+            top: 55%;
+            left: 50%; /* Fix for the typo: 'Left' to 'left' */
+            transform: translate(-50%, 50%);
+            font-size: 45px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bolder;
+            color: #006ac3;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>أدخل اسمك</h1>
+        <input type="text" id="userName" placeholder="اكتب اسمك هنا" />
+        <button onclick="updateName()">إرسال</button>
+    </div>
+    <button onclick="saveImage()">حفظ الصورة</button>
+
+    <div id="design">
+        <span id="name">اسمك هنا</span>
+    </div>
+
+    
+
+    <!-- Include html2canvas once -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+        function updateName() {
+            var userName = document.getElementById("userName").value;
+            document.getElementById("name").textContent = userName;
+        }
+
+        function saveImage() {
+            html2canvas(document.querySelector("#design")).then(canvas => {
+                var link = document.createElement('a');
+                link.download = 'design_with_name.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+    </script>
+
+</body>
+</html>
